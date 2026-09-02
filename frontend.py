@@ -1,7 +1,8 @@
-import streamlit as st
-import requests
 import base64
 import urllib.parse
+
+import requests
+import streamlit as st
 
 st.set_page_config(page_title="Simple Social", layout="wide")
 
