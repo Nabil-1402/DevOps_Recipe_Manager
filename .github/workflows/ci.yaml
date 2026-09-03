@@ -19,6 +19,9 @@ jobs:
       - name: Install dependencies
         run: uv sync
 
+      - name: Lint with ruff
+        run: uv run ruff check .  
+
       - name: Sanity-check the app imports
         env:
           IMAGEKIT_PRIVATE_KEY: ${{ secrets.IMAGEKIT_PRIVATE_KEY }}
