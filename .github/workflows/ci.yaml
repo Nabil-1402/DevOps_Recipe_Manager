@@ -2,7 +2,9 @@ name: CI
 
 on:
   push:
+    branches: [main]
   pull_request:
+    branches: [main]
 
 jobs:
   build:
@@ -19,9 +21,13 @@ jobs:
       - name: Install dependencies
         run: uv sync
 
-      - name: Sanity-check the app imports
+      - name: Lint with ruff
+        run: uv run ruff check .  
+
+      - name: Run tests
         env:
           IMAGEKIT_PRIVATE_KEY: ${{ secrets.IMAGEKIT_PRIVATE_KEY }}
           IMAGEKIT_PUBLIC_KEY: ${{ secrets.IMAGEKIT_PUBLIC_KEY }}
           IMAGEKIT_URL: ${{ secrets.IMAGEKIT_URL }}
-        run: uv run python -c "from app.app import app; print('App imported OK')"
+        run: uv run pytest
+

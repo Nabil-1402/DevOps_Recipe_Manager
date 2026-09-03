@@ -1,7 +1,8 @@
-import streamlit as st
-import requests
 import base64
 import urllib.parse
+
+import requests
+import streamlit as st
 
 st.set_page_config(page_title="Simple Social", layout="wide")
 
@@ -105,7 +106,7 @@ def create_transformed_url(original_url, transformation_params, caption=None):
 
     parts = original_url.split("/")
 
-    imagekit_id = parts[3]
+    #imagekit_id = parts[3]
     file_path = "/".join(parts[4:])
     base_url = "/".join(parts[:4])
     return f"{base_url}/tr:{transformation_params}/{file_path}"
@@ -130,15 +131,14 @@ def feed_page():
             with col1:
                 st.markdown(f"**{post['email']}** • {post['created_at'][:10]}")
             with col2:
-                if post.get('is_owner', False):
-                    if st.button("🗑️", key=f"delete_{post['id']}", help="Delete post"):
-                        # Delete the post
-                        response = requests.delete(f"http://localhost:8000/posts/{post['id']}", headers=get_headers())
-                        if response.status_code == 200:
-                            st.success("Post deleted!")
-                            st.rerun()
-                        else:
-                            st.error("Failed to delete post!")
+                if post.get('is_owner', False) and st.button("🗑️", key=f"delete_{post['id']}", help="Delete post"):
+                    # Delete the post
+                    response = requests.delete(f"http://localhost:8000/posts/{post['id']}", headers=get_headers())
+                    if response.status_code == 200:
+                        st.success("Post deleted!")
+                        st.rerun()
+                    else:
+                        st.error("Failed to delete post!")
 
             # Uniform media display with caption overlay
             caption = post.get('caption', '')
