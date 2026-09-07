@@ -22,7 +22,7 @@ jobs:
         run: uv sync
 
       - name: Lint with ruff
-        run: uv run ruff check .  
+        run: uv run ruff check .
 
       - name: Run tests
         env:
@@ -31,3 +31,5 @@ jobs:
           IMAGEKIT_URL: ${{ secrets.IMAGEKIT_URL }}
         run: uv run pytest
 
+      - name: Build Docker image
+        run: docker build -t recipe-manager .
