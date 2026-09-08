@@ -46,4 +46,4 @@ jobs:
         with:
           context: .
           push: true
-          tags: ghcr.io/${{ github.repository_owner }}/reciper-manager:latest
+          tags: ghcr.io/nabil-1402/recipe-manager:latest
