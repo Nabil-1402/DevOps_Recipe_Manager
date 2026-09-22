@@ -1,5 +1,7 @@
+import os
 import uuid
 
+from dotenv import load_dotenv
 from fastapi import Depends
 from fastapi_users import BaseUserManager, FastAPIUsers, UUIDIDMixin
 from fastapi_users.authentication import (
@@ -11,7 +13,8 @@ from fastapi_users.db import SQLAlchemyUserDatabase
 
 from app.db import User, get_user_db
 
-SECRET = "IDKtheSECRET"
+load_dotenv()
+SECRET = os.environ["JWT_SECRET"]
 
 class UserManager(UUIDIDMixin, BaseUserManager[User, uuid.UUID]):
     reset_password_token_secret = SECRET
