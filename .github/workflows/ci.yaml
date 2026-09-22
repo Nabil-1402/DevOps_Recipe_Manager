@@ -29,6 +29,7 @@ jobs:
 
       - name: Run tests
         env:
+          JWT_SECRET: ${{ secrets.JWT_SECRET}}
           IMAGEKIT_PRIVATE_KEY: ${{ secrets.IMAGEKIT_PRIVATE_KEY }}
           IMAGEKIT_PUBLIC_KEY: ${{ secrets.IMAGEKIT_PUBLIC_KEY }}
           IMAGEKIT_URL: ${{ secrets.IMAGEKIT_URL }}

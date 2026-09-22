@@ -1,3 +1,4 @@
+import os
 import uuid
 from collections.abc import AsyncGenerator
 from datetime import datetime
@@ -9,7 +10,10 @@ from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
 from sqlalchemy.orm import DeclarativeBase, relationship
 
-DATABASE_URL = "sqlite+aiosqlite:///./test.db"
+DATABASE_URL = os.getenv(
+    "DATABSE_URL",
+    "sqlite+aiosqlite:///./test.db"
+)
 
 class Base(DeclarativeBase):
     pass
